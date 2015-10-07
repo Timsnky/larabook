@@ -1,0 +1,15 @@
+<?php $__env->startSection('content'); ?>
+
+    <div class="jumbotron">
+        <h1>Welcome to Larabook</h1>
+        <p>Welcome to the premier place to talk about laravel with others. Why dont you sign up</p>
+
+        <?php if(! $currentUser): ?>
+            <p>
+              <?php echo link_to_route('register_path', 'Sign Up', null, ['class' => 'btn btn-lg btn-primary']); ?>
+
+            </p>
+        <?php endif; ?>
+    </div>
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layouts.default', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
