@@ -19,6 +19,4 @@ class RegisterUserCommand
         $this->email = $email;
         $this->password = $password;
     }
-
-
 }

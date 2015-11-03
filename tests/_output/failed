@@ -1,2 +1,1 @@
-tests/functional/SignUpCept.php
-tests/functional/SignInCept.php
+tests/functional/PostStatusCept.php

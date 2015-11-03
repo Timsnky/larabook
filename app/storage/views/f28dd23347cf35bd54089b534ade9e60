@@ -30,7 +30,8 @@
                         </ul>
                     </li>
                 <?php else: ?>
-                    <li><a href="/login">Login</a> </li>
+                    <li><?php echo link_to_route('register_path', 'Register'); ?></li>
+                    <li><?php echo link_to_route('login_path', 'Login'); ?></li>
                 <?php endif; ?>
             </ul>
         </div>

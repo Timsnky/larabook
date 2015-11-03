@@ -49,16 +49,15 @@
 	 */
 	public function store()
 	{
-		echo "Here";
 		$input = Input::only('email', 'password');
 
 		$this->signInForm->validate($input);
 
 		if (Auth::attempt($input))
 		{
-			Flash::message('Welcome back!');
+			Flash::message('Welcome back');
 
-			return Redirect::intended('statuses.index');
+			return Redirect::intended('statuses');
 		}
 	}
 

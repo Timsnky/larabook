@@ -6,6 +6,6 @@ $I->wantTo('Login to my Account');
 $I->signIn();
 
 $I->seeInCurrentUrl('/statuses');
-$I->see('Welcome back!');
+$I->see('Welcome back');
 
 $I->assertTrue(Auth::check());
