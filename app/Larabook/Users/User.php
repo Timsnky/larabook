@@ -7,11 +7,21 @@ use Illuminate\Auth\Reminders\RemindableInterface;
 use Eloquent;
 use Illuminate\Support\Facades\Hash;
 use Laracasts\Commander\Events\EventGenerator;
-use Larabook\Registration\Events\UserRegistered;
+use Larabook\Registration\Events\UserHasRegistered;
+use Laracasts\Presenter\PresentableTrait;
 
+/**
+ * Class User
+ * @package Larabook\Users
+ */
 class User extends Eloquent implements UserInterface, RemindableInterface {
 
-	use UserTrait, RemindableTrait, EventGenerator;
+	use UserTrait, RemindableTrait, EventGenerator, PresentableTrait, FollowableTrait;
+
+    /**
+     * @var string
+     */
+    protected $presenter = 'Larabook\Users\UserPresenter';
 
 	/**
 	 * The database table used by the model.
@@ -40,24 +50,40 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
      */
 	protected $fillable = ['username', 'email', 'password'];
 
-	/**
+	/**Register a new user
+     *
 	 * @param $username
 	 * @param $email
 	 * @param $password
-	 * @return static
+	 * @return user
      */
 	public static function register($username, $email, $password) {
 
 		$user = new static(compact('username', 'email', 'password'));
 
-		$user->raise(new UserRegistered($user ));
+		$user->raise(new UserHasRegistered($user));
 
 		return $user;
 	}
 
+    /**
+     * Get the statuses for a user
+     * @return statuses for a user
+     */
     public function statuses()
     {
-        return $this->hasMany('Larabook\Statuses\Status');
+        return $this->hasMany('Larabook\Statuses\Status')->latest();
     }
 
+    /**Check if the user object matched the Authenticated user
+     *
+     * @param $user
+     * @return bool
+     */
+    public function is($user)
+    {
+        if(is_null($user)) return false;
+
+        return $this->username == $user->username;
+    }
 }

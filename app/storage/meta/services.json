@@ -28,7 +28,8 @@
         "Illuminate\\Workbench\\WorkbenchServiceProvider",
         "Laracasts\\Commander\\CommanderServiceProvider",
         "Laracasts\\Validation\\ValidationServiceProvider",
-        "Laracasts\\Flash\\FlashServiceProvider"
+        "Laracasts\\Flash\\FlashServiceProvider",
+        "Larabook\\Providers\\EventServiceProvider"
     ],
     "eager": [
         "Illuminate\\Cookie\\CookieServiceProvider",
@@ -40,7 +41,8 @@
         "Illuminate\\Workbench\\WorkbenchServiceProvider",
         "Laracasts\\Commander\\CommanderServiceProvider",
         "Laracasts\\Validation\\ValidationServiceProvider",
-        "Laracasts\\Flash\\FlashServiceProvider"
+        "Laracasts\\Flash\\FlashServiceProvider",
+        "Larabook\\Providers\\EventServiceProvider"
     ],
     "deferred": {
         "artisan": "Illuminate\\Foundation\\Providers\\ArtisanServiceProvider",

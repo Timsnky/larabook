@@ -11,6 +11,10 @@
 |
 */
 
+//Event::listen('Larabook.Registration.Events.UserRegistered', function($events) {
+//    dd("hSER");
+//});
+
 Route::get('/', [
     'as' => 'home',
     'uses' => 'PagesController@home'
@@ -42,11 +46,35 @@ Route::get('logout', [
 ]);
 
 Route::get ('statuses',[
-    'as' => 'statuses_path',
-    'uses' => 'StatusController@index'
+    'as' => 'statuses',
+    'uses' => 'StatusesController@index'
 ]);
 
 Route::post ('statuses',[
     'as' => 'statuses_path',
-    'uses' => 'StatusController@store'
+    'uses' => 'StatusesController@store'
+]);
+
+Route::get('users', [
+    'as' => 'users_path',
+    'uses' => 'UserController@index'
+]);
+
+Route::get('@{username}', [
+    'as' => 'profile_path',
+    'uses' => 'UserController@show'
+]);
+
+/*
+ * FOLLOWS
+ */
+
+Route::post('follows', [
+    'as' => 'follows_path',
+    'uses' => 'FollowsController@store'
+]);
+
+Route::delete('follows/{id}', [
+    'as' => 'unfollows_path',
+    'uses' => 'FollowsController@destroy'
 ]);

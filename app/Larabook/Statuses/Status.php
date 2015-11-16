@@ -11,11 +11,14 @@ namespace Larabook\Statuses;
 use Eloquent;
 use Laracasts\Commander\Events\EventGenerator;
 use Larabook\Statuses\Events\StatusWasPublished;
+use Laracasts\Presenter\PresentableTrait;
 
 
 class Status extends Eloquent
 {
-    use EventGenerator;
+    use EventGenerator, PresentableTrait;
+
+    protected $presenter = 'Larabook\Statuses\StatusPresenter';
 
     protected $fillable = ['body'];
 

@@ -13,9 +13,10 @@ class Functional extends \Codeception\Module
     public function signIn()
     {
         $email = 'foo@example.com';
+        $username = 'Foobar';
         $password = 'foo';
 
-        $this->haveAnAccount(compact('email', 'password'));
+        $this->haveAnAccount(compact('username','email', 'password'));
 
         $I = $this->getModule('Laravel4');
 
@@ -29,7 +30,7 @@ class Functional extends \Codeception\Module
     {
         $I = $this->getModule('Laravel4');
 
-        $I->fillField('Status:', $body);
+        $I->fillField('body', $body);
         $I->click('Post Status');
         //$this->have('Larabook\Statuses\Status', $overrides);
     }

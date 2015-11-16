@@ -9,9 +9,12 @@
 namespace Larabook\Statuses;
 
 use Laracasts\Commander\CommandHandler;
+use Laracasts\Commander\Events\DispatchableTrait;
 
 class PublishStatusCommandHandler implements CommandHandler
 {
+    use DispatchableTrait;
+
     protected $statusRepository;
 
     /**
@@ -33,6 +36,10 @@ class PublishStatusCommandHandler implements CommandHandler
     {
         $status = Status::publish($command->body);
 
-        $this->statusRepository->save($status, $command->userId);
+        $status = $this->statusRepository->save($status, $command->userId);
+
+        $this->dispatchEventsFor($status);
+
+        return $status;
     }
 }

@@ -1,17 +1,12 @@
 @extends ('layouts.default')
 
 @section('content')
-    <h1>Post a Status</h1>
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
 
-    {{ Form::open() }}
+            @include('statuses.partials.publish_status_form')
 
-    <div class="form-group">
-        {{ Form::label('body', 'Status:') }}
-        {{ Form::textarea('body', null, ['class' => 'form-control']) }}
+            @include('statuses.partials.statuses')
+        </div>
     </div>
-
-    <div class="form-group">
-        {{ Form::submit('Post Status', ['class' => 'btn btn-primary']) }}
-    </div>
-    {{ Form::close() }}
 @stop

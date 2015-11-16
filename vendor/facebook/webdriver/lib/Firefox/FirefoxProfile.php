@@ -16,6 +16,7 @@
 namespace Facebook\WebDriver\Firefox;
 
 use Facebook\WebDriver\Exception\WebDriverException;
+use FilesystemIterator;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
 use ZipArchive;
@@ -45,6 +46,7 @@ class FirefoxProfile {
    * @param string $key
    * @param string|bool|int $value
    * @return FirefoxProfile
+   * @throws WebDriverException
    */
   public function setPreference($key, $value) {
     if (is_string($value)) {
@@ -98,6 +100,11 @@ class FirefoxProfile {
     $zip->close();
 
     $profile = base64_encode(file_get_contents($temp_zip));
+
+    // clean up
+    $this->deleteDirectory($temp_dir);
+    unlink($temp_zip);
+
     return $profile;
   }
 
@@ -122,6 +129,10 @@ class FirefoxProfile {
     mkdir($ext_dir, 0777, true);
 
     $this->extractTo($extension, $ext_dir);
+
+    // clean up
+    $this->deleteDirectory($temp_dir);
+
     return $ext_dir;
   }
 
@@ -141,6 +152,24 @@ class FirefoxProfile {
       }
     }
     return $temp_dir;
+  }
+
+  /**
+   * @param string $directory The path to the directory.
+   */
+  private function deleteDirectory($directory) {
+    $dir = new RecursiveDirectoryIterator($directory, FilesystemIterator::SKIP_DOTS);
+    $paths = new RecursiveIteratorIterator($dir, RecursiveIteratorIterator::CHILD_FIRST);
+
+    foreach ($paths as $path) {
+      if ($path->isDir() && !$path->isLink()) {
+        rmdir($path->getPathname());
+      } else {
+        unlink($path->getPathname());
+      }
+    }
+
+    rmdir($directory);
   }
 
   /**
