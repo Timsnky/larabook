@@ -13,12 +13,12 @@
 
     <div class="form-group">
         {{ Form::label('password','Password:') }}
-        {{ Form::password('password',null,['class' => 'form-control', 'required']) }}
+        {{ Form::password('password',['class' => 'form-control', 'required']) }}
     </div>
 
     <div class="form-group">
         {{ Form::label('password_confirmation','Password Confirmation:') }}
-        {{ Form::password('password_confirmation',null,['class' => 'form-control', 'required']) }}
+        {{ Form::password('password_confirmation',['class' => 'form-control', 'required']) }}
     </div>
 
     <div class=" form-group">
