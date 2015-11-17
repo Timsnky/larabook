@@ -16,6 +16,15 @@
     <script src="//code.jquery.com/jquery.js"></script>
     <script src="bower/jquery.min.js"></script>
     <script src="bower/bootstrap.min.js"></script>
-    <script>$('#flash-overlay-modal').modal();</script>
+    <script>
+        $('#flash-overlay-modal').modal();
+
+        $('.comments_create-form').on('keydown', function(e) {
+            if(e.keyCode == 13) {
+                e.preventDefault();
+                $(this).submit();
+            }
+        });
+    </script>
 </body>
 </html>

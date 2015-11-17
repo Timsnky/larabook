@@ -35,4 +35,9 @@ class Status extends Eloquent
     {
         return $this->belongsTo('Larabook\Users\User');
     }
+
+    public function comments()
+    {
+        return $this->hasMany('Larabook\Statuses\Comment');
+    }
 }

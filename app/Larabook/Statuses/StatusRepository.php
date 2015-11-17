@@ -10,6 +10,7 @@ namespace Larabook\Statuses;
 
 use Larabook\Users\User;
 
+
 class  StatusRepository
 {
     public function save(Status $status, $userId)
@@ -28,6 +29,16 @@ class  StatusRepository
 
         $userIds[] = $user->id;
 
-        return Status::whereIn('user_id', $userIds)->latest()->get();
+        return Status::with('comments')->whereIn('user_id', $userIds)->latest()->get();
+    }
+
+    public function leaveComment($userId, $statusId, $body)
+    {
+        $comment = Comment::leave($body, $statusId);
+
+        User::findOrFail($userId)->comments()->save($comment);
+
+        return $comment;
+
     }
 }
